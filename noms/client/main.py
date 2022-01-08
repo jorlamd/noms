@@ -66,7 +66,7 @@ class Client:
 
     def search_query(self, name):
         params = dict(
-            q=name,
+            query=name,
             ds='Standard Reference',
             format='json'
         )
