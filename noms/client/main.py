@@ -42,7 +42,7 @@ class Client:
     API. It must be initialized with an API key.
     """
 
-    url = 'https://api.nal.usda.gov/usda/ndb'
+    url = 'https://api.nal.usda.gov/fdc/v1/foods'
 
     def __init__(self, key):
         """
