@@ -21,18 +21,19 @@ class SearchResults():
             r_str +="="*112 + "\n"
             r_str +="Search results for \'{}\' on USDA Standard Reference Database".format(self.json["search_term"]) + "\n"
             r_str +="="*112 + "\n"
+            print(self.json.keys())
             if max_entries == None:
-                max_entries = len(self.json["items"])
-            if max_entries < len(self.json["items"]):
-                self.json["items"] = self.json["items"][:max_entries]
-            self.json["items"].sort(key=operator.itemgetter("group"))
+                max_entries = len(self.json["items"]["foods"])
+            if max_entries < len(self.json["items"]["foods"]):
+                self.json["items"]["foods"] = self.json["items"]["foods"][:max_entries]
+            self.json["items"]["foods"].sort(key=operator.itemgetter("foodCategory"))
             r_str +="{name:<72} {group:^30} {id:>8}".format(name="Name",group="Group",id="ID") + "\n"
-            for item in self.json["items"]:
-                if len(item["name"]) > 70:
-                    item["name"] = item["name"][:70] + ".."
-                if len(item["group"]) > 28:
-                    item["group"] = item["group"][:28] + ".."
-                r_str +="{name:<72} {group:^30} {id:>8}".format(name=item["name"],group=item["group"],id=item["ndbno"]) + "\n"
+            for item in self.json["items"]["foods"]:
+                if len(item["description"]) > 70:
+                    item["description"] = item["description"][:70] + ".."
+                if len(item["foodCategory"]) > 28:
+                    item["foodCategory"] = item["foodCategory"][:28] + ".."
+                r_str +="{name:<72} {group:^30} {id:>8}".format(name=item["description"],group=item["foodCategory"],id=item["fdcId"]) + "\n"
             r_str +="="*112 + "\n"
         return r_str
 
